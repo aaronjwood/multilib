@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
