@@ -221,7 +221,6 @@
     <ClInclude Include="lib\include\zlib.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\dllmain.cpp" />
     <ClCompile Include="src\multilib.cpp" />
     <ClCompile Include="src\stdafx.cpp" />
   </ItemGroup>

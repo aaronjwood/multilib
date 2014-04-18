@@ -431,9 +431,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\dllmain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\multilib.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
