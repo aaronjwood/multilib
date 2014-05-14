@@ -1,6 +1,6 @@
 <?php
 
-require "HttpRequest.php";
+require_once "HttpRequest.php";
 
 class Get extends HttpRequest {
 

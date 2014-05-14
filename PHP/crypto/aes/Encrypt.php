@@ -22,6 +22,10 @@ class Encrypt {
         $size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
         return mcrypt_create_iv($size, MCRYPT_DEV_URANDOM);
     }
+    
+    private function encrypt() {
+        return mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $this->key, $this->clearText, MCRYPT_MODE_CBC, $this->iv);
+    }
 
     public function getKey() {
         return $this->key;
@@ -31,12 +35,12 @@ class Encrypt {
         return $this->iv;
     }
 
-    public function encrypt() {
-        return mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $this->key, $this->clearText, MCRYPT_MODE_CBC, $this->iv);
+    public function getEncoded() {
+        return base64_encode($this->encryptedText);
     }
-
-    public function toString() {
-        return base64_encode($this->encrypt());
+    
+    public function getBinary() {
+        return $this->encryptedText;
     }
 
 }
