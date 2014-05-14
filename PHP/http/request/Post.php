@@ -37,24 +37,6 @@ class Post extends HttpRequest {
         return $response;
     }
 
-    /**
-     * Processes the array being passed and returns a properly formatted string for the POST request
-     * @param array $data
-     * @return string
-     */
-    protected function setData($data) {
-        $requestString = "";
-        $counter = 0;
-        foreach($data as $key => $value) {
-            $requestString .= urlencode($key) . "=" . urlencode($value);
-            if($counter < count($data)) {
-                $requestString .= "&";
-            }
-            $counter++;
-        }
-        return $requestString;
-    }
-
 }
 
 ?>
