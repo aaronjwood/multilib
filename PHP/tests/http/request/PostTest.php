@@ -1,12 +1,12 @@
 <?php
 
-class GetTest extends PHPUnit_Framework_TestCase {
+class PostTest extends PHPUnit_Framework_TestCase {
     
     private $request;
     private $ssl;
     
     public function setUp() {
-        $this->request = new Get(array(
+        $this->request = new Post(array(
             "q" => "php"
         ), $this->ssl);
     }
