@@ -42,6 +42,10 @@ class Encrypt {
     public function getBinary() {
         return $this->encryptedText;
     }
+    
+    public function __toString() {
+        return $this->getEncoded();
+    }
 
 }
 
