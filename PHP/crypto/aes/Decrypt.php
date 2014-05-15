@@ -14,12 +14,13 @@ class Decrypt {
         $this->decryptedText = $this->decrypt();
     }
 
-    public function decrypt() {
-        return mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $this->key, $this->encryptedText, MCRYPT_MODE_CBC, $this->iv);
+    private function decrypt() {
+        $decrypted = mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $this->key, $this->encryptedText, MCRYPT_MODE_CBC, $this->iv);
+        return rtrim($decrypted, "\0");
     }
 
-    public function toString() {
-        return $this->decrypt();
+    public function __toString() {
+        return $this->decryptedText;
     }
 
 }
