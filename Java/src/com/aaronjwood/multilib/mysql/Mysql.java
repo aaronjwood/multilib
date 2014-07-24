@@ -16,8 +16,7 @@ public class Mysql {
     private String db;
 
     /**
-     * Provides the necessary information and credentials to connect to a
-     * database
+     * Sets necessary information to connect to a database
      *
      * @param host The MySQL host
      * @param username The username to access the database
@@ -32,8 +31,7 @@ public class Mysql {
     }
 
     /**
-     * Provides the necessary information and credentials including the port
-     * number to connect to a database
+     * Sets necessary information including the port to connect to a database
      *
      * @param host The MySQL host
      * @param port The port MySQL is running on
@@ -47,7 +45,7 @@ public class Mysql {
     }
 
     /**
-     * Connects to the database
+     * Connects to the database using the information set in the constructor
      *
      * @throws SQLException
      */
