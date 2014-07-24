@@ -6,8 +6,8 @@ abstract class HttpRequest {
 
     /**
      * Processes the array being passed and returns a properly formatted string for the HTTP request
-     * @param array $data
-     * @return string
+     * @param array $data The data that will be sent as part of the request
+     * @return string The data in the appropriate format for an HTTP request
      */
     protected function setData($data) {
         $requestString = "";

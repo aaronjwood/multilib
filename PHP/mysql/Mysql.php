@@ -14,12 +14,13 @@ class Mysql {
     private $errorCode;
 
     /**
+     * Class constructor
      * Sets the required information to connect for the instance of this class
-     * @param string $host
-     * @param string $username
-     * @param string $password
-     * @param string $dbName
-     * @param int $port
+     * @param string $host The host to connect to
+     * @param string $username Username for the database connection
+     * @param string $password Password for the database connection
+     * @param string $dbName The name of the database to use
+     * @param int $port The port that the database server is listening on
      */
     public function __construct($host, $username, $password, $dbName, $port = 3306) {
         $this->host = $host;
@@ -44,9 +45,9 @@ class Mysql {
 
     /**
      * Queries the database and optionally binds any parameters passed with the query
-     * @param string $sql
-     * @param array $parameters
-     * @return boolean
+     * @param string $sql The SQL to be executed
+     * @param array $parameters Optional parameters to be bound in the query
+     * @return boolean Indicates whether or not the query succeeded
      */
     public function query($sql, $parameters = null) {
         $this->statement = $this->db->prepare($sql);
@@ -68,7 +69,7 @@ class Mysql {
 
     /**
      * Returns all records from the last executed query
-     * @return object
+     * @return object An object containing all of the records
      */
     public function fetchAllRecords() {
         return $this->statement->fetchAll();
@@ -76,7 +77,7 @@ class Mysql {
 
     /**
      * Returns the next row from the last executed query
-     * @return object
+     * @return object An object containing all of the columns of a row
      */
     public function fetchRecord() {
         return $this->statement->fetch();
@@ -84,7 +85,7 @@ class Mysql {
 
     /**
      * Returns the error message as an array if it exists
-     * @return array
+     * @return array Error message associated with the last operation
      */
     public function getErrorMessage() {
         return $this->errorInfo;
@@ -92,7 +93,7 @@ class Mysql {
 
     /**
      * Returns the SQLSTATE associated with the last operation
-     * @return string
+     * @return string The five character alphanumeric SQLSTATE
      */
     public function getErrorCode() {
         return $this->errorCode;
