@@ -133,7 +133,7 @@ public class Encrypt {
      *
      * @return The byte representation of the encrypted data
      */
-    public final byte[] encrypt() {
+    private byte[] encrypt() {
         try {
             return this.encryptCipher.doFinal(this.clearText);
         }
