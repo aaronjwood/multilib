@@ -38,8 +38,7 @@ class Mysql {
             $this->db = new PDO("mysql:host=$this->host;port=$this->port;dbname=$this->dbName", $this->username, $this->password);
         }
         catch(PDOException $e) {
-            echo $e->getMessage();
-            die();
+            throw $e;
         }
     }
 
