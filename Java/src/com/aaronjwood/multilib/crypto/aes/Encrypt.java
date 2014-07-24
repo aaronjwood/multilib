@@ -6,8 +6,6 @@ import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -29,8 +27,15 @@ public class Encrypt {
      * Encrypts data using AES-128
      *
      * @param clearText The data to be encrypted
+     * @throws java.security.NoSuchAlgorithmException
+     * @throws javax.crypto.NoSuchPaddingException
+     * @throws java.security.InvalidKeyException
+     * @throws javax.crypto.BadPaddingException
+     * @throws java.security.InvalidAlgorithmParameterException
+     * @throws javax.crypto.IllegalBlockSizeException
+     * @throws java.io.UnsupportedEncodingException
      */
-    public Encrypt(String clearText) {
+    public Encrypt(String clearText) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException {
 
         //Generate the IV and key
         this.iv = new IvParameterSpec(this.generateIv());
@@ -46,16 +51,10 @@ public class Encrypt {
      * @param clearText The clear text passed by the user
      * @return The byte representation of the clear text
      */
-    private byte[] convertClearText(String clearText) {
+    private byte[] convertClearText(String clearText) throws UnsupportedEncodingException {
 
         //Convert the clear text passed by the user into bytes
-        try {
-            return clearText.getBytes("UTF-8");
-        }
-        catch (UnsupportedEncodingException ex) {
-            Logger.getLogger(Encrypt.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
+        return clearText.getBytes("UTF-8");
     }
 
     /**
@@ -63,18 +62,12 @@ public class Encrypt {
      *
      * @return The cipher used to encrypt data
      */
-    private Cipher createCipher() {
+    private Cipher createCipher() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException {
 
         //Create an AES cipher in CBC mode using PKCS5 padding
-        try {
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-            cipher.init(Cipher.ENCRYPT_MODE, this.key, this.iv);
-            return cipher;
-        }
-        catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException ex) {
-            Logger.getLogger(Encrypt.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
+        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        cipher.init(Cipher.ENCRYPT_MODE, this.key, this.iv);
+        return cipher;
     }
 
     /**
@@ -94,20 +87,15 @@ public class Encrypt {
      *
      * @return The secret key
      */
-    private SecretKey generateKey() {
+    private SecretKey generateKey() throws NoSuchAlgorithmException {
         KeyGenerator keygen;
-        try {
 
-            //Java normally doesn't support 256-bit key sizes without an extra installation so stick with a 128-bit key
-            keygen = KeyGenerator.getInstance("AES");
-            keygen.init(128);
-            SecretKey aesKey = keygen.generateKey();
-            return aesKey;
-        }
-        catch (NoSuchAlgorithmException ex) {
-            Logger.getLogger(Encrypt.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
+        //Java normally doesn't support 256-bit key sizes without an extra installation so stick with a 128-bit key
+        keygen = KeyGenerator.getInstance("AES");
+        keygen.init(128);
+        SecretKey aesKey = keygen.generateKey();
+        return aesKey;
+
     }
 
     /**
@@ -133,14 +121,9 @@ public class Encrypt {
      *
      * @return The byte representation of the encrypted data
      */
-    private byte[] encrypt() {
-        try {
-            return this.encryptCipher.doFinal(this.clearText);
-        }
-        catch (IllegalBlockSizeException | BadPaddingException ex) {
-            Logger.getLogger(Encrypt.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
+    private byte[] encrypt() throws IllegalBlockSizeException, BadPaddingException {
+        return this.encryptCipher.doFinal(this.clearText);
+
     }
 
     /**
