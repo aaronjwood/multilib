@@ -3,8 +3,6 @@ package com.aaronjwood.multilib.crypto.aes;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -27,8 +25,14 @@ public class Decrypt {
      * @param encryptedText The data to be decrypted
      * @param key The secret key to decrypt the data
      * @param iv The IV that was used during the encryption phase
+     * @throws java.security.NoSuchAlgorithmException
+     * @throws javax.crypto.NoSuchPaddingException
+     * @throws java.security.InvalidKeyException
+     * @throws java.security.InvalidAlgorithmParameterException
+     * @throws javax.crypto.IllegalBlockSizeException
+     * @throws javax.crypto.BadPaddingException
      */
-    public Decrypt(byte[] encryptedText, SecretKey key, IvParameterSpec iv) {
+    public Decrypt(byte[] encryptedText, SecretKey key, IvParameterSpec iv) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException, BadPaddingException {
         this.key = key;
         this.iv = iv;
         this.decryptCipher = this.createCipher();
@@ -41,16 +45,10 @@ public class Decrypt {
      *
      * @return The cipher used to decrypt data
      */
-    private Cipher createCipher() {
-        try {
-            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-            cipher.init(Cipher.DECRYPT_MODE, this.key, this.iv);
-            return cipher;
-        }
-        catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | InvalidAlgorithmParameterException ex) {
-            Logger.getLogger(Decrypt.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
+    private Cipher createCipher() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException {
+        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        cipher.init(Cipher.DECRYPT_MODE, this.key, this.iv);
+        return cipher;
     }
 
     /**
@@ -58,14 +56,10 @@ public class Decrypt {
      *
      * @return The byte representation of the decrypted text
      */
-    public byte[] decrypt() {
-        try {
-            return this.decryptCipher.doFinal(this.encryptedText);
-        }
-        catch (IllegalBlockSizeException | BadPaddingException ex) {
-            Logger.getLogger(Decrypt.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
+    private byte[] decrypt() throws IllegalBlockSizeException, BadPaddingException {
+
+        return this.decryptCipher.doFinal(this.encryptedText);
+
     }
 
     /**
