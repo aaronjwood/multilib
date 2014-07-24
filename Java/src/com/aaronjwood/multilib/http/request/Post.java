@@ -9,8 +9,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.net.ssl.HttpsURLConnection;
 
 public final class Post extends HttpRequest {
@@ -24,8 +22,9 @@ public final class Post extends HttpRequest {
      *
      * @param data The data to be sent along with the request
      * @param ssl Indicates if the connection should be secure or not
+     * @throws java.io.UnsupportedEncodingException
      */
-    public Post(Map<String, String> data, boolean ssl) {
+    public Post(Map<String, String> data, boolean ssl) throws UnsupportedEncodingException {
         this.data = this.setData(data);
         this.ssl = ssl;
     }
@@ -73,21 +72,17 @@ public final class Post extends HttpRequest {
      *
      * @param data The map containing the key/value pairs
      * @return A properly formatted string of data for the POST request
+     * @throws java.io.UnsupportedEncodingException
      */
     @Override
-    protected String setData(Map<String, String> data) {
+    protected String setData(Map<String, String> data) throws UnsupportedEncodingException {
         StringBuilder requestString = new StringBuilder();
         int counter = 0;
         for (Map.Entry<String, String> value : data.entrySet()) {
-            try {
-                counter++;
-                requestString.append(URLEncoder.encode(value.getKey(), "UTF-8")).append("=").append(URLEncoder.encode(value.getValue(), "UTF-8"));
-                if (counter < data.size()) {
-                    requestString.append("&");
-                }
-            }
-            catch (UnsupportedEncodingException ex) {
-                Logger.getLogger(Post.class.getName()).log(Level.SEVERE, null, ex);
+            counter++;
+            requestString.append(URLEncoder.encode(value.getKey(), "UTF-8")).append("=").append(URLEncoder.encode(value.getValue(), "UTF-8"));
+            if (counter < data.size()) {
+                requestString.append("&");
             }
         }
         return requestString.toString();
