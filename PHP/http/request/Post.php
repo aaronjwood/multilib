@@ -2,7 +2,7 @@
 
 require_once "HttpRequest.php";
 
-class Post extends HttpRequest {
+final class Post extends HttpRequest {
 
     private $data;
     private $ssl;

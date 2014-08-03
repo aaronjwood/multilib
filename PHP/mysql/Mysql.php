@@ -1,6 +1,6 @@
 <?php
 
-class Mysql {
+final class Mysql {
 
     private $db;
     private $host;

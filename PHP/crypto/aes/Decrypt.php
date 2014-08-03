@@ -1,6 +1,6 @@
 <?php
 
-class Decrypt {
+final class Decrypt {
 
     private $key;
     private $iv;

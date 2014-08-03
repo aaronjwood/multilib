@@ -10,7 +10,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 
-public class Decrypt {
+public final class Decrypt {
 
     private Cipher decryptCipher;
     private SecretKey key;
