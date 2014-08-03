@@ -14,7 +14,7 @@ class DecryptTest extends PHPUnit_Framework_TestCase {
      */
     protected function setUp() {
         $this->cipher = new Encrypt("Some text to decrypt");
-        $this->decrypt = new Decrypt($this->cipher->getBinary(), $this->cipher->getKey(), $this->cipher->getIv());
+        $this->decrypt = new Decrypt($this->cipher->getRaw(), $this->cipher->getKey(), $this->cipher->getIv());
     }
 
     /**
