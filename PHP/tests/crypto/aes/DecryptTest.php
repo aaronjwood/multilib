@@ -24,16 +24,26 @@ class DecryptTest extends PHPUnit_Framework_TestCase {
     protected function tearDown() {
         
     }
+    
+    /**
+     * @covers Decrypt::getEncoded
+     */
+    public function testGetEncoded() {
+        $this->assertNotEquals($this->decrypt->getEncoded(), $this->cipher->getEncoded());
+    }
+
+    /**
+     * @covers Decrypt::getRaw
+     */
+    public function testGetRaw() {
+        $this->assertNotEquals($this->decrypt->getRaw(), $this->cipher->getRaw());
+    }
 
     /**
      * @covers Decrypt::__toString
-     * @todo   Implement test__toString().
      */
     public function test__toString() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->assertNotEmpty(print_r($this->decrypt, true));
     }
 
 }
