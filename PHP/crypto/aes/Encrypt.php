@@ -72,7 +72,7 @@ class Encrypt {
      * Returns the encrypted data in binary format
      * @return string The encrypted data
      */
-    public function getBinary() {
+    public function getRaw() {
         return $this->encryptedText;
     }
     

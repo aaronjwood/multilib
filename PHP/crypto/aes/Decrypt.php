@@ -31,11 +31,27 @@ class Decrypt {
     }
 
     /**
+     * Returns the decrypted data as a base64 string
+     * @return string The decrypted data in base64 format
+     */
+    public function getEncoded() {
+        return base64_encode($this->decryptedText);
+    }
+
+    /**
+     * Returns the decrypted data as is
+     * @return string The decrypted data
+     */
+    public function getRaw() {
+        return $this->decryptedText;
+    }
+
+    /**
      * Overrides the native method to return the decrypted data as a printable string
      * @return string The decrypted data as a printable string
      */
     public function __toString() {
-        return $this->decryptedText;
+        return $this->getRaw();
     }
 
 }
