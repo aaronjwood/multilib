@@ -1,7 +1,7 @@
 <?php
 
 class EncryptTest extends PHPUnit_Framework_TestCase {
-    
+
     protected $cipher1;
     protected $cipher2;
 
@@ -54,13 +54,9 @@ class EncryptTest extends PHPUnit_Framework_TestCase {
 
     /**
      * @covers Encrypt::__toString
-     * @todo   Implement test__toString().
      */
     public function test__toString() {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->assertNotEmpty(print_r($this->cipher1, true));
     }
 
 }
