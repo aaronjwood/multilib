@@ -1,13 +1,13 @@
 package com.aaronjwood.multilib.crypto.aes;
 
-import org.apache.commons.codec.binary.Base64;
-
+import javax.crypto.*;
 import javax.crypto.spec.IvParameterSpec;
 import java.io.UnsupportedEncodingException;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
+import java.util.Base64;
 
 public final class Encrypt {
 
@@ -128,7 +128,7 @@ public final class Encrypt {
      */
     @Override
     public String toString() {
-        return Base64.encodeBase64String(encryptedText);
+        return Base64.getEncoder().encodeToString(encryptedText);
     }
 
 }
